@@ -1,0 +1,62 @@
+{% load static %}
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <!-- Link to Home Page -->
+            <a href="{% url 'homepage' %}">
+                <img width="50px" src="{% static 'images/free-30-instagram-stories-icons23_122570.png'%}" alt="img1">
+            </a>
+            <!-- Link to Home Page -->
+            <a class="home" href="{% url 'homepage' %}">
+                <i>Petstagram</i>
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <ul class="nav-group">
+                <li class="nav-item">
+                    <!-- Link to Add Pet Page -->
+                    <a href="{% url 'add-pet' %}">
+                        <i>Add Pet</i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!-- Link to Add Photo Page -->
+                    <a href="{% url 'add-photo' %}">
+                        <i>Add Photo</i>
+                    </a>
+                </li>
+                {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <!-- Link to Login Page -->
+                        <a href="{% url 'login-user' %}">
+                            <i>Login</i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <!-- Link to Register Page -->
+                        <a href="{% url 'register-user' %}">
+                            <i>Register</i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <!-- Link to Profile Details Page -->
+                        <a href="{% url 'profile-details' request.user.pk %}">
+                            <i>Profile</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout-user' %}"><i>Logout</i></a>
+                    </li>
+                    {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a href="http://127.0.0.1:8000/admin/"><i>Admin Page</i></a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
