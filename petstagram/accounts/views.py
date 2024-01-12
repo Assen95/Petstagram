@@ -62,7 +62,7 @@ class UserProfileView(LoginRequiredMixin, views.DetailView):
         context['pets'] = Pet.objects.filter(user=self.object).all()
         context['total_likes_count'] = total_likes_count
         logger.debug(f"Before processing: Current User: {self.request.user}")
-        # TODO: This here is the issue, figure out on you own on how to retrieve the page's owner and be logged in as
+        # TODO: SOLVED!!!!!!!!!!!!!!!!! This here is the issue, figure out on you own on how to retrieve the page's owner and be logged in as
         #  the current user.
         #  Check your logic when checking who the user is => self.request.user = self.object turns the user into the
         #  object aka. the owner. This is what has been breaking the code. Now with that knAwledge, go and fix the issue Day 4
@@ -80,6 +80,11 @@ class UserProfileView(LoginRequiredMixin, views.DetailView):
         return context
 
 
+class UserDeleteView(views.DeleteView):
+    model = User
+    template_name = 'accounts/profile-delete-page.html'
+    success_url = reverse_lazy('homepage')
+
 # def register(request):
 #     return render(request, 'accounts/register-page.html')
 
@@ -95,7 +100,7 @@ class UserProfileView(LoginRequiredMixin, views.DetailView):
 #
 # def profile_edit(request):
 #     return render(request, 'accounts/profile-edit-page.html')
-
-
-def profile_delete(request):
-    return render(request, 'accounts/profile-delete-page.html')
+#
+#
+# def profile_delete(request):
+#     return render(request, 'accounts/profile-delete-page.html')

@@ -20,8 +20,7 @@
                                 </div>
                             </div>
                         </a>
-                        <h3>
-{#                        TODO: Add the correct user info about owner in all places: Day 2 #}
+                        <h3
                             <!-- Link to User Profile Details Page -->
                             <a href="{% url 'profile-details' pk=photo.user.pk %}">
                                 <!-- IF user has first name and last name -->
@@ -41,7 +40,6 @@
                             {% endif %}
                             <!-- IF the viewer is the creator of the photo -->
                         {% if photo_owner == request.user %}
-{#                            TODO: Имаме прогрес, сега разбери какво се чупи при profile details!!! #}
                             <div class="edit-delete-btns">
 
                                 <!-- Link to Edit Pet Photo Page -->
@@ -155,8 +153,8 @@
                     <!-- Start Tagged Pets Section-->
                 {% for pet in photo.tagged_pets.all %}
                     <!-- Link to First Tagged Pet Details Page -->
-{#                    TODO: Fix the "username" part#}
-                    <a href="{% url 'details-pet' "username" pet.slug %}">
+
+                    <a href="{% url 'details-pet' photo.user pet.slug %}">
                         <p class="message">
                             <b>{{ pet.name }}</b>
                         </p>
@@ -187,9 +185,16 @@
                                     <p>
                                         <!-- Link to User Profile Details Page-->
                                         <!-- User First and/or Last Name or username-->
-{#                                        TODO: Fix this #}
-                                        <a href="">Steven Ivanov</a>
-                                        <!-- User Comment -->
+                                        {% if photo.user.first_name and photo.user.last_name %}
+                                            <a href="{% url 'profile-details' pk=photo.user.pk  %}">{{ both_names }}</a>
+                                        {% elif photo.user.first_name %}
+                                            <a href="{% url 'profile-details' pk=photo.user.pk  %}">{{ photo.user.first_name }}</a>
+                                        {% elif photo.user.last_name %}
+                                            <a href="{% url 'profile-details' pk=photo.user.pk  %}">{{ photo.user.last_name }}</a>
+                                        {% else %}
+                                            <a href="{% url 'profile-details' pk=photo.user.pk  %}">{{ photo.user.username }}</a>
+                                        {% endif %}
+
                                         {{ comment.text }}
                                     </p>
                                 </div>

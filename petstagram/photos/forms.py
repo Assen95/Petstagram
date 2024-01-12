@@ -10,9 +10,6 @@ labels = {
     'tagged_pets': 'Tag Pets'
 }
 
-
-# TODO: Make it so only the user creator's pets are shown as options in both instance
-#  do the same for the edit form. Make a parent class.
 class PhotoAddForm(forms.ModelForm):
     class Meta:
         model = Photo

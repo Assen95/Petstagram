@@ -28,7 +28,6 @@ User = get_user_model()
 def add_photo(request):
 
     form = PhotoAddForm(request.user, request.FILES)
-    # TODO: do the thing after "else:"
     if request.method == 'POST':
         form = PhotoAddForm(request.user, request.POST, request.FILES)
         if form.is_valid():
@@ -36,10 +35,6 @@ def add_photo(request):
             instance.user = request.user
             instance.save()
             return redirect('homepage')
-    # else:
-    #     form = PhotoAddForm()
-    #     # This works, but it shows "photo_object(1)", how to transform it in forms
-    #     form.fields['tagged_pets'].queryset = photos
 
     context = {
         'form': form

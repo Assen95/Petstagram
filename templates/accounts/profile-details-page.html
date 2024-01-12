@@ -89,7 +89,6 @@
 
         <!-- Start Last Uploaded Photos Section -->
         <div class="pet-photos">
-{#            TODO: Refactor the uploaded pet photos, while making a for statement, to iterate through every existing one#}
             {% for photo in photos %}
             <!-- Link to Last Uploaded Pet Photo -->
             <a href="{% url 'details-photo' photo.pk %}">

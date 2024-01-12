@@ -8,8 +8,11 @@
                 <div class="profile_img">
                     <div class="image">
                         <!-- Pet URL Image -->
-                        <img src={{ pet.user.profile_picture }}
-                             alt="img8">
+                        {% if pet.user.profile_picture %}
+                            <img src={{ pet.user.profile_picture }} alt="img8">
+                        {% else %}
+                            <img src="{% static 'images/person.png' %}" alt="img8">
+                        {% endif %}
                     </div>
                 </div>
 
